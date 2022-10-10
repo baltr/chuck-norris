@@ -58,6 +58,9 @@ export default {
     },
     components:{
         Joke
+    },
+    created(){
+        this.addJoke()
     }
 }
 </script>
