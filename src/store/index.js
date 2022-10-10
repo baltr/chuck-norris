@@ -21,9 +21,5 @@ export default new Vuex.Store({
         state.favouriteJokes.splice(state.favouriteJokes.indexOf(payload), 1)
       }
     }
-  },
-  actions: {
-  },
-  modules: {
   }
 })

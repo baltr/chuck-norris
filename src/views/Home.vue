@@ -5,10 +5,10 @@
         <router-link to="/Categories"><button>Categories</button></router-link>
         <router-link to="/Search"><button>Search</button></router-link>
         <button @click="addJoke">Add joke</button>
-        <div v-for="(joke, index) in jokeList" :key="index">
+        <div :class="isFavouriteColor(joke)" v-for="(joke, index) in jokeList" :key="index">
             <Joke :joke="joke"/>
             <button @click="favourite(joke)">Favourite</button>
-            <button @click="removeJoke(index)">Remove</button>
+            <button :disabled="isFavouriteDisableButton(joke)" @click="removeJoke(index)">Remove</button>
         </div> 
     </div>
 </template>
@@ -46,6 +46,14 @@ export default {
                     this.$store.commit('addFavouriteJoke', joke)
                 }
             }
+        },
+        isFavouriteColor(joke){
+            if (this.$store.getters.getFavouriteJokes.indexOf(joke) > -1) return 'favouriteJoke'
+            else return 'notFavouriteJoke'
+        },
+        isFavouriteDisableButton(joke){
+            if (this.$store.getters.getFavouriteJokes.indexOf(joke) > -1) return true
+            else return false
         }
     },
     components:{
@@ -53,3 +61,12 @@ export default {
     }
 }
 </script>
+
+<style>
+.favouriteJoke{
+    background-color: goldenrod;
+};
+.notFavouriteJoke{
+    background-color: transparent;
+}
+</style>
