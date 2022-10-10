@@ -5,7 +5,7 @@
         <router-link to="/Categories"><button>Categories</button></router-link>
         <router-link to="/Search"><button>Search</button></router-link>
         <input v-model="query" @input="addJoke"/>
-        <div v-for="joke in jokeList" :key="joke">
+        <div v-for="(joke, index) in jokeList" :key="index" @click="removeJoke(index)">
             <Joke :joke="joke"/>
         </div> 
     </div>
@@ -32,6 +32,11 @@ export default {
                 })
                 console.log(tempList)
             }).catch(response => console.log(response))
+        },
+        removeJoke(index){
+            if (index > -1){
+                this.jokeList.splice(index, 1)
+            }
         }
     },
     components:{
